@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Roboto+Slab:wght@200&display=swap" rel="stylesheet"> 
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/index.css" rel="stylesheet">
+    <title>Game</title>
+</head>
+<body>
+    <h1 class="title">Rock, Paper, Scissors!</h1>
+
+    <div class="game">  
+        <div class="player-opts">
+            <div><img opt="rock" src="img2/rock.png"></div>
+            <div><img opt="paper" src="img2/paper.png"></div>
+            <div><img opt="scissor" src="img2/scissor.png"></div>
+        </div>
+        <div class="ai-opts">
+            <div><img src="img2/rock.png"></div>
+            <div><img src="img2/paper.png"></div>
+            <div><img src="img2/scissor.png"></div>
+        </div>
+    </div>
+
+    <div id="scoreBoard">
+        <h1> 0 - 0 </h1>
+    </div>
+
+</body>
+
+<script>
+    var elems = document.querySelectorAll('.player-opts div > img');
+    var aiOptions = document.querySelectorAll('.ai-opts div > img')
+    var playerOpt = "";
+    var aiOpt = "";
+
+    var playerPts = 0;
+    var aiPts = 0;
+    var tiePts = 0;
+
+
+    function AiPlay(){
+        let rand = Math.random()*2.99;
+        rand = Math.floor(rand);
+        return rand;
+    }
+
+    function resetOpacity(){
+        for(var i=0; i<elems.length; i++){
+            elems[i].style.opacity = 0.3;
+            aiOptions[i].style.opacity = 0.3;
+        }
+    }
+
+    // Selecao de jogada
+    for(var i=0; i<elems.length; i++){
+        //a variavel t eh usada pra servir de callback para o icone selecionado 
+        elems[i].addEventListener('click',function(t){  
+            // alert('clicado ' + i);
+            console.log(t);
+            resetOpacity();
+            t.target.style.opacity = 1;
+            playerOpt = t.target.getAttribute('opt');
+            // alert(playerOpt);
+
+            //Jogada do PC
+            rand = AiPlay();
+            let str = ['rock','paper','scissor'];
+            aiOpt = str[rand];
+            // alert(aiOpt);
+
+            aiOptions[rand].style.opacity=1;
+
+            // Conds. ganha
+            if(playerOpt == 'rock' && aiOpt == 'scissor'){
+                playerPts +=1;
+            }else if(playerOpt == 'scissor' && aiOpt == 'paper'){
+                playerPts += 1; 
+            }else if(playerOpt == 'paper' && aiOpt == 'rock'){
+                playerPts += 1;
+            // Conds. perde    
+            }else if(playerOpt == 'rock' && aiOpt == 'paper'){
+                aiPts +=1;
+            }else if(playerOpt == 'scissor' && aiOpt == 'rock'){
+                aiPts += 1; 
+            }else if(playerOpt == 'paper' && aiOpt == 'scissor'){
+                aiPts += 1;
+            // Empate
+            }else if(playerOpt == aiOpt){
+                tiePts += 1;
+            }
+
+            document.getElementById("scoreBoard").innerHTML = 
+            '<h1>'+playerPts+' - '+aiPts+'</h1>'; 
+
+
+        })
+    }
+
+</script>
+</html>

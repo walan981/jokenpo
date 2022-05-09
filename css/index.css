@@ -1,0 +1,58 @@
+*{
+    font-family: 'Roboto Slab', serif;
+    color: rgb(48, 122, 232);
+}
+
+h1{
+    font-size: 40px;
+}
+
+body{
+    background-image: url(../img2/wallp.jpg);
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+.title{
+    text-align: center;
+}
+
+body{
+    background-color: rgb(255, 255, 255);
+}
+
+.game{
+    display: flex;
+}
+
+.player-opts{
+    width: 50%;
+    text-align: center;
+}
+
+.ai-opts{
+    width: 50%;
+    text-align: center;
+}
+
+
+.player-opts img,
+.ai-opts img{
+    max-width: 100px;
+    cursor: pointer;
+    opacity: 0.3;
+    margin-bottom: 30px;
+}
+
+#scoreBoard{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+/* .player-opts img:hover,
+.ai-opts img:hover{
+    opacity: 0.5;
+} */
